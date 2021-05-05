@@ -65,7 +65,7 @@ getNewQuestion = () => {
     const number = choice.dataset["number"];
     choice.innerText = currentQuestion["choice" + number];
   });
-
+  progressLevel.style.width = questionCounter / maximumQuestions *100 + "%";
   availableQuestion.splice(questionIndex, 1);
   acceptingAnswers = true;
 };

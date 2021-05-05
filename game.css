@@ -50,12 +50,13 @@
 
 #progressBar {
   width: 20rem;
-  height: 5rem;
+  height: 4rem;
   border: 0.3rem solid #1adb14;
+  margin: 1rem;
 }
 
 #progressLevel {
-  height: 4.7rem;
+  height: 3.7rem;
   width: 0%;
   background-color: #1adb14;
 }
