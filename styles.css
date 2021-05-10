@@ -102,3 +102,20 @@ h3 {
   box-shadow: none;
   transform: none;
 }
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  width: 20rem;
+  margin-bottom: 1.3rem;
+  padding: 1.3rem;
+  font-size: 20px;
+  text-align: center;
+  border: none;
+  box-shadow: 0 0.1rem 1.4rem 0 #56a5eb;
+}

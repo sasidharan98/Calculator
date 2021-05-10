@@ -5,7 +5,7 @@
   <meta name="view-port" content="width = device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-compatible" content="ie-edge" />
   <link rel="stylesheet" type="text/css" href="styles.css" />
-  
+
 </head>
 
 <body>
@@ -14,11 +14,12 @@
       <h1 id="finalScore">0</h1>
       <form>
         <input type="text" class="username" id="username" placeholder="username" />
-        <button type="submit" class="btn" id="saveScorebtn" onClick="saveHighScore(event)" >Save</button>
+        <button type="submit" class="btn" id="saveScorebtn" onClick="saveHighScore(event)"
+        disabled>Save</button>
       </form>
+      <a href="/game.html" class="btn">Play Again</a>
+      <a href="/index.html" class="btn">Home</a>
     </div>
-    <a href="/game.html" class="btn">Play Again</a>
-    <a href="/index.html" class="btn">Home</a>
   </div>
 </body>
 
