@@ -1,14 +1,25 @@
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="view-port" content="width = device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-compatible" content="ie-edge" />
-    <link rel="stylesheet" type="text/css" href="styles.css" />
-    <link rel="stylesheet" type="text/css" href="game.css" />
-  </head>
-  <body>
-    <div class="end">
-      Final Score
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="view-port" content="width = device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-compatible" content="ie-edge" />
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+  
+</head>
+
+<body>
+  <div class="container">
+    <div id="end" class="flex-center flex-column">
+      <h1 id="finalScore">0</h1>
+      <form>
+        <input type="text" class="username" id="username" placeholder="username" />
+        <button type="submit" class="btn" id="saveScorebtn" onClick="saveHighScore(event)" >Save</button>
+      </form>
     </div>
-  </body>
+    <a href="/game.html" class="btn">Play Again</a>
+    <a href="/index.html" class="btn">Home</a>
+  </div>
+</body>
+
 </html>
