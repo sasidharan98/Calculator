@@ -12,6 +12,10 @@ let acceptingAnswers = false;
 let Score = 0;
 let availableQuestion = [];
 
+fetch('https://opentdb.com/api.php?amount=10&category=29&difficulty=easy&type=multiple')
+  .then(response => response.json())
+  .then(question => console.log(question.results));
+
 let questions = [
   {
     question: 'Inside which HTML element do we put the JavaScript??',
