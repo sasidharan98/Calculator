@@ -1,9 +1,9 @@
-const question = document.getElementById("question");
-const choices = Array.from(document.getElementsByClassName("choice-text"));
-const questionsCounter = document.getElementById("questionsCounter");
-const scores = document.getElementById("scores");
-const progressBar = document.getElementById("progressBar");
-const progressLevel = document.getElementById("progressLevel");
+const question = document.getElementById('question');
+const choices = Array.from(document.getElementsByClassName('choice-text'));
+const questionsCounter = document.getElementById('questionsCounter');
+const scores = document.getElementById('scores');
+const progressBar = document.getElementById('progressBar');
+const progressLevel = document.getElementById('progressLevel');
 console.log(choices);
 
 let questionCounter = 0;
@@ -14,11 +14,11 @@ let availableQuestion = [];
 
 let questions = [
   {
-    question: "Inside which HTML element do we put the JavaScript??",
-    choice1: "<script>",
-    choice2: "<javascript>",
-    choice3: "<js>",
-    choice4: "<scripting>",
+    question: 'Inside which HTML element do we put the JavaScript??',
+    choice1: '<script>',
+    choice2: '<javascript>',
+    choice3: '<js>',
+    choice4: '<scripting>',
     answer: 1
   },
   {
@@ -53,31 +53,32 @@ startGame = () => {
 
 getNewQuestion = () => {
   if (availableQuestion.length === 0 || questionCounter >= maximumQuestions) {
-    return window.location.assign("/end.html");
+    localStorage.setItem('mostRecentScore', score);
+    return window.location.assign('/end.html');
   }
   questionCounter++;
   questionsCounter.innerText =
-    "Questions:" + questionCounter + "/" + maximumQuestions;
+    'Questions:' + questionCounter + '/' + maximumQuestions;
   const questionIndex = Math.floor(Math.random() * availableQuestion.length);
   currentQuestion = availableQuestion[questionIndex];
   question.innerText = currentQuestion.question;
   choices.forEach(choice => {
-    const number = choice.dataset["number"];
-    choice.innerText = currentQuestion["choice" + number];
+    const number = choice.dataset['number'];
+    choice.innerText = currentQuestion['choice' + number];
   });
-  progressLevel.style.width = questionCounter / maximumQuestions *100 + "%";
+  progressLevel.style.width = (questionCounter / maximumQuestions) * 100 + '%';
   availableQuestion.splice(questionIndex, 1);
   acceptingAnswers = true;
 };
 choices.forEach(choice => {
-  choice.addEventListener("click", e => {
+  choice.addEventListener('click', e => {
     if (!acceptingAnswers) return;
     acceptingAnswers = false;
     const selectedChoice = e.target;
-    const selectedAnswer = selectedChoice.dataset["number"];
+    const selectedAnswer = selectedChoice.dataset['number'];
     const classToApply =
-      selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
-    if (classToApply === "correct") {
+      selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect';
+    if (classToApply === 'correct') {
       incrementScore(bonusValue);
     }
     selectedChoice.parentElement.classList.add(classToApply);
