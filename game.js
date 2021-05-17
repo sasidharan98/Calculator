@@ -11,40 +11,67 @@ let currentQuestion = [];
 let acceptingAnswers = false;
 let Score = 0;
 let availableQuestion = [];
+let questions = [];
 
-fetch('https://opentdb.com/api.php?amount=10&category=29&difficulty=easy&type=multiple')
-  .then(response => response.json())
-  .then(question => console.log(question.results));
+fetch(
+  'https://opentdb.com/api.php?amount=10&category=29&difficulty=easy&type=multiple'
+)
+  .then(res => {
+    return res.json();
+  })
+  .then(loadedQuestions => {
+    questions = loadedQuestions.results.map(loadedQuestion => {
+      const formattedQuestion = {
+        question: loadedQuestion.question.replace(/(&quot\;)/g, '"')
+      };
 
-let questions = [
-  {
-    question: 'Inside which HTML element do we put the JavaScript??',
-    choice1: '<script>',
-    choice2: '<javascript>',
-    choice3: '<js>',
-    choice4: '<scripting>',
-    answer: 1
-  },
-  {
-    question:
-      "What is the correct syntax for referring to an external script called 'xxx.js'?",
-    choice1: "<script href='xxx.js'>",
-    choice2: "<script name='xxx.js'>",
-    choice3: "<script src='xxx.js'>",
-    choice4: "<script file='xxx.js'>",
-    answer: 3
-  },
-  {
-    question: " How do you write 'Hello World' in an alert box?",
-    choice1: "msgBox('Hello World');",
-    choice2: "alertBox('Hello World');",
-    choice3: "msg('Hello World');",
-    choice4: "alert('Hello World');",
-    answer: 4
-  }
-];
+      const answerChoices = [...loadedQuestion.incorrect_answers];
+      formattedQuestion.answer = Math.floor(Math.random() * 4) + 1;
+      answerChoices.splice(
+        formattedQuestion.answer - 1,
+        0,
+        loadedQuestion.correct_answer
+      );
 
-const maximumQuestions = 3;
+      answerChoices.forEach((choice, index) => {
+        formattedQuestion['choice' + (index + 1)] = choice;
+      });
+      return formattedQuestion;
+    });
+    startGame();
+  })
+  .catch(err => {
+    console.error(err);
+  });
+
+//   {
+//     question: 'Inside which HTML element do we put the JavaScript??',
+//     choice1: '<script>',
+//     choice2: '<javascript>',
+//     choice3: '<js>',
+//     choice4: '<scripting>',
+//     answer: 1
+//   },
+//   {
+//     question:
+//       "What is the correct syntax for referring to an external script called 'xxx.js'?",
+//     choice1: "<script href='xxx.js'>",
+//     choice2: "<script name='xxx.js'>",
+//     choice3: "<script src='xxx.js'>",
+//     choice4: "<script file='xxx.js'>",
+//     answer: 3
+//   },
+//   {
+//     question: " How do you write 'Hello World' in an alert box?",
+//     choice1: "msgBox('Hello World');",
+//     choice2: "alertBox('Hello World');",
+//     choice3: "msg('Hello World');",
+//     choice4: "alert('Hello World');",
+//     answer: 4
+//   }
+// ];
+
+const maximumQuestions = 5;
 const bonusValue = 10;
 
 startGame = () => {
@@ -97,4 +124,3 @@ incrementScore = num => {
   score += num;
   scores.innerText = score;
 };
-startGame();
