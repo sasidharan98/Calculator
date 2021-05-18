@@ -4,6 +4,8 @@ const questionsCounter = document.getElementById('questionsCounter');
 const scores = document.getElementById('scores');
 const progressBar = document.getElementById('progressBar');
 const progressLevel = document.getElementById('progressLevel');
+const loader = document.getElementById('loader');
+const game = document.getElementById('game');
 console.log(choices);
 
 let questionCounter = 0;
@@ -14,7 +16,7 @@ let availableQuestion = [];
 let questions = [];
 
 fetch(
-  'https://opentdb.com/api.php?amount=10&category=29&difficulty=easy&type=multiple'
+  'https://opentdb.com/api.php?amount=10&category=29&difficulty=hard&type=multiple'
 )
   .then(res => {
     return res.json();
@@ -22,7 +24,10 @@ fetch(
   .then(loadedQuestions => {
     questions = loadedQuestions.results.map(loadedQuestion => {
       const formattedQuestion = {
-        question: loadedQuestion.question.replace(/(&quot\;)/g, '"')
+        question: loadedQuestion.question
+          .replace(/(&quot\;)/g, '"')
+          .replace(/(&amp\;)/g, '&')
+          .replace(/(&#039\;)/g, "'")
       };
 
       const answerChoices = [...loadedQuestion.incorrect_answers];
@@ -80,6 +85,8 @@ startGame = () => {
   availableQuestion = [...questions];
   console.log(availableQuestion);
   getNewQuestion();
+  game.classList.remove('hidden');
+  loader.classList.add('hidden');
 };
 
 getNewQuestion = () => {
